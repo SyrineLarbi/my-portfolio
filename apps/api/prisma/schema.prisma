@@ -1,0 +1,46 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  message   String
+  persona   String?
+  visitorId String?
+  createdAt DateTime @default(now())
+  status    String   @default("queued")
+  errorMsg  String?
+
+  @@index([createdAt])
+  @@index([status])
+}
+
+model CvDownload {
+  id        String   @id @default(cuid())
+  ua        String?
+  country   String?
+  persona   String?
+  visitorId String?
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([visitorId])
+}
+
+model PageView {
+  id        String   @id @default(cuid())
+  path      String
+  persona   String?
+  visitorId String?
+  createdAt DateTime @default(now())
+
+  @@index([persona, createdAt])
+  @@index([visitorId])
+}
