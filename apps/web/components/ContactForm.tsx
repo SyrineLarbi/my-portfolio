@@ -48,9 +48,9 @@ export function ContactForm() {
   if (success) {
     return (
       <div className="glass-card p-8 text-center">
-        <h3 className="text-xl font-bold gradient-text">Message received</h3>
+        <h3 className="text-xl font-bold gradient-text">Message sent ✓</h3>
         <p className="mt-2 text-text-muted">
-          Thanks — I'll get back to you within 24 hours. Your message is in the queue.
+          Thanks — your message is on its way and I'll get back to you within 24 hours.
         </p>
         <button
           onClick={() => setSuccess(false)}
@@ -115,7 +115,12 @@ export function ContactForm() {
         {errors.message && <p className="text-xs text-accent-magenta">{errors.message.message}</p>}
       </div>
 
-      <input type="hidden" {...register('persona')} />
+      {/* Coerce "" (no persona in the URL) to undefined so the optional enum
+          in ContactSchema validates — otherwise the form fails silently. */}
+      <input
+        type="hidden"
+        {...register('persona', { setValueAs: (v) => (v ? v : undefined) })}
+      />
 
       {serverError && (
         <p className="rounded-md border border-accent-magenta/40 bg-accent-magenta/10 px-3 py-2 text-sm text-accent-magenta">
