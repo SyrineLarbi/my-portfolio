@@ -5,19 +5,9 @@ import { Suspense } from 'react'
 
 import { cn } from '@/lib/cn'
 
-import { useCvCount } from '../lib/use-cv-count'
-
 type Size = 'sm' | 'md'
 
-function CvButton({
-  size,
-  persona,
-  count,
-}: {
-  size: Size
-  persona: string
-  count: number | null
-}) {
+function CvButton({ size, persona }: { size: Size; persona: string }) {
   const sizeClass = size === 'sm' ? 'px-5 py-2 text-sm' : 'px-7 py-3 text-sm'
 
   return (
@@ -29,14 +19,6 @@ function CvButton({
       )}
     >
       <span>Download CV</span>
-      {count !== null && (
-        <span
-          aria-label={`${count} downloads so far`}
-          className="rounded-pill bg-black/20 px-2 py-0.5 text-[10px] font-bold tabular-nums"
-        >
-          {count.toLocaleString()}
-        </span>
-      )}
     </a>
   )
 }
@@ -44,9 +26,8 @@ function CvButton({
 function CvDownloadButtonInner({ size }: { size: Size }) {
   const params = useSearchParams()
   const persona = params.get('persona') ?? 'fullstack'
-  const { count } = useCvCount()
 
-  return <CvButton size={size} persona={persona} count={count} />
+  return <CvButton size={size} persona={persona} />
 }
 
 export function CvDownloadButton({ size = 'md' }: { size?: Size }) {
@@ -54,7 +35,7 @@ export function CvDownloadButton({ size = 'md' }: { size?: Size }) {
   // generation of every page that renders this button. Self-wrapping keeps
   // each call site (SiteNav, Hero, …) safe without its own boundary.
   return (
-    <Suspense fallback={<CvButton size={size} persona="fullstack" count={null} />}>
+    <Suspense fallback={<CvButton size={size} persona="fullstack" />}>
       <CvDownloadButtonInner size={size} />
     </Suspense>
   )
