@@ -1,0 +1,54 @@
+---
+title: Resume Builder
+blurb: Full-stack résumé builder — fill in a structured form and get a polished, print-ready PDF rendered server-side with Playwright. Next.js editorial UI + NestJS rendering service in a Turborepo.
+personas: [fullstack]
+stack:
+  - Next.js
+  - React
+  - TypeScript
+  - Tailwind CSS
+  - NestJS
+  - Express
+  - Playwright
+  - class-validator
+  - Turborepo
+  - Docker
+  - Vercel
+links:
+  github: https://github.com/SyrineLarbi/resume_builder
+  demo: https://resume-builder-web-8qnv.vercel.app/dashboard
+---
+
+## What it is
+
+A **résumé builder** that turns a structured form into a clean, typographically polished,
+print-ready PDF. The dashboard lets you enter your details section by section and export a
+document rendered server-side — not a screenshot, but proper HTML laid out and printed to
+PDF with a headless browser.
+
+## Architecture highlights
+
+- **Monorepo (Turborepo)** — a `web` app, an `api` service, and a shared `packages/shared`
+  layer for types and models kept in sync across both ends.
+- **Frontend** — Next.js + React + TypeScript + Tailwind CSS. Editorial serif typography
+  (EB Garamond / Amiri) for a document-like, print-first feel rather than a generic web UI.
+- **Backend** — NestJS + Express REST API with DTO validation (`class-validator` /
+  `class-transformer`) and a clear error model.
+- **PDF rendering** — **Playwright** drives a headless browser to render the résumé HTML and
+  print it to a pixel-accurate PDF, so the exported file matches the on-screen layout exactly.
+- **Deployment** — Next.js frontend on **Vercel**; the rendering service is containerized
+  with **Docker** (Playwright needs its browser dependencies baked into the image).
+
+## Why it's interesting
+
+- **Server-side PDF done right.** Rendering with a real browser engine (Playwright) instead
+  of a PDF-drawing library means the output honors the same CSS as the preview — fonts,
+  spacing, and page breaks all match.
+- **Shared-types monorepo.** The résumé data model lives in one place and is reused by both
+  the form and the renderer, so the two never drift.
+- **Print-first design.** Serif typography and a document-centric layout make the result read
+  like a real résumé, not a web page exported to paper.
+
+## Stack at a glance
+
+`Next.js` · `React` · `TypeScript` · `Tailwind` · `NestJS` · `Playwright` · `Turborepo` · `Docker` · `Vercel`.
