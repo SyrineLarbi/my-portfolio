@@ -78,6 +78,7 @@ export function FullstackTab() {
         <div className="grid gap-6 md:grid-cols-2">
           <ProjectCard
             highlight
+            slug="hr-insight-ai"
             title="HR Insight AI"
             blurb="3-service personal platform that predicts employee attrition and auto-generates executive reports for HR leaders. NestJS + Next.js + FastAPI + XGBoost + Claude API + Prisma/Postgres."
             stack={[
@@ -90,8 +91,9 @@ export function FullstackTab() {
             }}
           />
           <ProjectCard
+            slug="ai-talent-portfolio"
             title="AI Talent Portfolio Generator"
-            blurb="Next.js + NestJS feature that turns a short wizard form into a published portfolio page in under 2 minutes. AI writes the bio, headline, skills, and brand summary; photos go to Cloudinary; the result lives at a shareable /p/{slug} URL with an editorial monochrome theme."
+            blurb="Next.js + NestJS feature that turns a short wizard form into a published portfolio page in under 2 minutes. Now live in the real world — actress Ryme Bn Messaoud uses a generated portfolio as her public talent page and links it from her Instagram."
             stack={[
               'Next.js', 'NestJS', 'TypeScript', 'Tailwind', 'shadcn/ui',
               'MariaDB', 'Cloudinary', 'Groq / OpenAI / Claude', 'Vercel',
@@ -99,6 +101,20 @@ export function FullstackTab() {
             links={{
               github: 'https://github.com/SyrineLarbi/AI-powered-Digital-Talent-Portfolio-Platform',
               demo: 'https://ai-powered-digital-talent-portfolio.vercel.app',
+              example: 'https://www.reacchy.com/rymebnmessaoud',
+            }}
+          />
+          <ProjectCard
+            slug="resume-builder"
+            title="Resume Builder"
+            blurb="Full-stack résumé builder — fill in a structured form and export a polished, print-ready PDF rendered server-side with Playwright. Next.js editorial UI + NestJS rendering service in a Turborepo."
+            stack={[
+              'Next.js', 'React', 'TypeScript', 'Tailwind', 'NestJS',
+              'Playwright', 'Turborepo', 'Docker', 'Vercel',
+            ]}
+            links={{
+              github: 'https://github.com/SyrineLarbi/resume_builder',
+              demo: 'https://resume-builder-web-8qnv.vercel.app/dashboard',
             }}
           />
           <ProjectCard
