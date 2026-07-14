@@ -1,0 +1,38 @@
+---
+title: Olist EDA — Brazilian e-commerce
+blurb: Exploratory analysis of 100k+ Olist orders (2016–2018), answering 5 business questions with pandas and matplotlib — revenue trends, category mix, geography, delivery impact on reviews, and customer retention.
+personas: [data]
+stack:
+  - Python
+  - pandas
+  - numpy
+  - matplotlib
+  - seaborn
+  - scipy
+  - JupyterLab
+links:
+  github: https://github.com/SyrineLarbi/ecommerce-eda
+  nbviewer: https://nbviewer.org/github/SyrineLarbi/ecommerce-eda/blob/main/notebooks/01-olist-eda.ipynb
+---
+
+## What it is
+
+Five business questions a real e-commerce exec would ask of the [Olist Brazilian E-commerce](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce) dataset (9 relational CSVs, ~100k orders, 2016–2018), each answered as one chart + one quotable finding.
+
+## Highlights
+
+- **Revenue trend** — 5.4× growth in 11 months; Black Friday 2017 alone hit **BRL 1.2M**.
+- **Categories** — PCs and agro/industry are revenue-heavy but volume-light (premium); garden tools dominate volume without leading revenue.
+- **Geography** — Top-5 states drive **75%** of orders and **76%** of revenue. The market is heavily São Paulo–weighted.
+- **Delivery → review** — Spearman correlation **−0.31** between delivery days and review score; deliveries past 26 days drop the average review by ~1.8 stars.
+- **Retention** — **96.9%** of customers order once and never return. The growth came from new acquisition, not repeat business.
+
+## What it took
+
+- **Plumbing** — 9 raw CSVs → one cleaned `delivered` orders frame with `delivery_days`, `order_year_month`, and joined `order_revenue`. Foreign-key sanity checks before any join so dropped rows would have been caught early.
+- **Analysis** — five independent notebook sections, each a tight aggregate → plot → finding. All five plots saved to `figures/` so the README can embed them directly.
+- **Reproducibility** — pinned `requirements.txt`, Kaggle-CLI dataset download, `make`-like setup in the repo README. Anyone can `git clone` + `pip install -r requirements.txt` + run the notebook end-to-end.
+
+## Stack at a glance
+
+`pandas` · `numpy` · `matplotlib` · `seaborn` · `scipy` · `jupyterlab` — deliberately the smallest dependency set that does the job. No notebook magic, no hidden helpers.

@@ -1,0 +1,49 @@
+---
+title: AI Talent Portfolio Generator
+blurb: Next.js + NestJS feature that turns a short wizard form into a published portfolio page in under 2 minutes — AI writes the bio, headline, skills, and brand summary; photos go to Cloudinary; the result lives at a shareable public URL.
+personas: [fullstack]
+stack:
+  - Next.js
+  - NestJS
+  - TypeScript
+  - Tailwind CSS
+  - shadcn/ui
+  - MariaDB
+  - Cloudinary
+  - Groq / OpenAI / Claude
+  - Vercel
+links:
+  github: https://github.com/SyrineLarbi/AI-powered-Digital-Talent-Portfolio-Platform
+  demo: https://ai-powered-digital-talent-portfolio.vercel.app
+---
+
+## What it is
+
+A drop-in **portfolio generator** for actresses, models, influencers, and content creators. Slots into a host app that already handles auth, billing, and analytics — this feature owns one job: form → AI-written portfolio → public shareable URL in under two minutes.
+
+## The 2-minute flow
+
+1. Wizard form: a few questions about the talent — niche, experience, brand voice.
+2. Photo upload to Cloudinary (full color, the visual focal point).
+3. Socials + experience pasted in.
+4. **Generate** → AI writes bio, headline, skills, and brand summary in one shot.
+5. Live preview with light edits, then **Publish**.
+6. Public page lands at `/p/{slug}` and is share-link ready.
+
+## Architecture highlights
+
+- **Frontend** — Next.js + TypeScript + Tailwind + shadcn/ui. Editorial monochrome theme: black, white, greys, gallery-like typography; photos stay in full color as the focal points. Deployed on Vercel.
+- **Backend** — NestJS REST API with DTO validation, error model, and rate limiting. Receives an authenticated `userId` from the host app; no auth/login logic duplicated.
+- **AI layer** — provider abstraction over a single structured-output prompt. Default backend is **Groq** (free, OpenAI-compatible) for testing; the same interface swaps cleanly to OpenAI / Gemini / Claude in prod. Output is JSON-schema validated before the page is written.
+- **Storage** — Cloudinary for photos, MariaDB / MySQL for portfolio rows + slugs (Railway/Aiven free tier).
+- **Public page** — server-rendered, indexable, with OG image and share metadata so the link previews well on LinkedIn / Instagram / WhatsApp.
+
+## Why it's interesting
+
+- **Tight feature, not a from-scratch app.** Designed to plug into an existing host — a realistic enterprise-style scope rather than a CRUD demo.
+- **Provider-agnostic AI.** The `AIProvider` interface means switching from Groq to Claude is a config change, not a refactor. Useful when cost/quality trade-offs change.
+- **The host-app integration story** is documented up front (`docs/01-mvp-scope.md`, `06-system-architecture.md`) — auth, dashboard, billing all stay out of scope and are inherited from the host. That's the same separation-of-concerns pattern enterprise feature teams use.
+
+## Stack at a glance
+
+`Next.js` · `NestJS` · `TypeScript` · `Tailwind` · `shadcn/ui` · `MariaDB` · `Cloudinary` · `Groq` (swappable to Claude/OpenAI) · `Vercel`.

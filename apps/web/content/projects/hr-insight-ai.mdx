@@ -1,0 +1,43 @@
+---
+title: HR Insight AI
+blurb: 3-service personal platform that predicts employee attrition and auto-generates executive reports for HR leaders.
+personas: [fullstack, data]
+flagship: true
+stack:
+  - TypeScript
+  - NestJS
+  - Next.js
+  - React 19
+  - Ant Design
+  - FastAPI
+  - Python
+  - XGBoost
+  - scikit-learn
+  - Prisma
+  - PostgreSQL
+  - Claude API
+  - Socket.IO
+  - JWT/RBAC
+links:
+  github: https://github.com/SyrineLarbi
+---
+
+## What it is
+
+A **3-service platform** (NestJS REST API + Next.js dashboard + FastAPI ML service) that
+predicts employee attrition risk and generates AI-written executive reports with action
+plans for HR leadership.
+
+## Highlights
+
+- Multi-service architecture: NestJS API orchestrates a Python / FastAPI ML service and a Next.js / Ant Design dashboard, communicating over REST + WebSockets.
+- Role-based access control with 4 roles (Admin / HR Manager / Team Manager / Viewer), JWT auth, Passport strategies, and granular team-level assignments via a join table.
+- End-to-end ETL pipeline (Extract → Clean → Transform → Validate) in Python / pandas for ingesting employee CSV data into Postgres and preparing features for inference.
+- XGBoost attrition classifier on engineered features (tenure, engagement, overtime, promotion gap, training, absenteeism); served through batch and single-employee endpoints with risk levels (LOW / MEDIUM / HIGH).
+- Claude API integration to auto-generate report summaries and structured action plans, persisted alongside historical `RiskSnapshot` records for trend tracking.
+- 9 domain entities in Prisma with cascade deletes and an `AuditLog` table capturing every privileged action for compliance.
+- Responsive Ant Design dashboard with charts, real-time updates via Socket.IO, PDF export (pdfmake + file-saver), role-scoped report generation.
+
+## Stack at a glance
+
+NestJS · Next.js · FastAPI · XGBoost · Claude API · Prisma · Postgres · Socket.IO.

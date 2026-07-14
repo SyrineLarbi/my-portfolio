@@ -1,0 +1,39 @@
+---
+title: ETL Mini-Pipeline — Daily Weather
+blurb: A medallion-style data pipeline (raw → bronze → silver → gold) that pulls daily weather for 5 cities from Open-Meteo, validates every row with Pydantic, lands it in a DuckDB warehouse, and serves it through a Streamlit dashboard. Zero hosted infrastructure.
+personas: [data]
+stack:
+  - Python
+  - DuckDB
+  - pandas
+  - Pydantic v2
+  - PyArrow
+  - httpx
+  - Typer
+  - Streamlit
+  - Altair
+links:
+  github: https://github.com/SyrineLarbi/etl-mini-pipeline
+---
+
+## What it is
+
+A small-but-real ELT pipeline that retrieves daily weather aggregates for **Tunis, Lisbon, Paris, Cairo, and Lagos** from the [Open-Meteo](https://open-meteo.com/) API (no auth) and moves them through a four-layer medallion architecture into a DuckDB warehouse, with a Streamlit dashboard on top. It's the "beyond notebooks" project — end-to-end ownership of data plumbing without any hosted infrastructure.
+
+## Highlights
+
+- **Medallion architecture** — `extract() → to_bronze() → to_silver() → to_gold() → DuckDB → dashboard`. Raw JSON is stored verbatim for auditability; bronze is schema-validated Parquet; silver adds derived columns (`temp_avg`, `windy_day`, `rainy_day`); gold holds analytics-ready aggregates.
+- **Validation at the boundary** — every row is checked with Pydantic v2 at the bronze layer, so bad data is rejected up front instead of propagating downstream.
+- **Idempotent by design** — each stage is a pure function: same input → same output, no side effects beyond the file it writes. Re-running is safe.
+- **Append-only history** — every run writes an audit trail into `gold.weather_history`, so the warehouse accumulates a queryable record over time.
+- **Operable** — a Typer CLI exposes `run`, `list-runs`, `dashboard`, and `doctor` (a health check), and results are explorable in a Streamlit + Altair dashboard.
+
+## What it took
+
+- **Ingestion** — `httpx` against Open-Meteo's daily endpoint for five cities, responses persisted raw before any transformation so failures are debuggable after the fact.
+- **Storage** — Parquet via PyArrow through the bronze/silver/gold lanes, with DuckDB as the query engine over the gold tables. No servers, no auth, no hosted orchestrator.
+- **Zero-infrastructure execution** — the whole pipeline runs on demand from the CLI. Deliberately no scheduler: the point is to prove the medallion flow and validation boundary cleanly, not to stand up ops.
+
+## Stack at a glance
+
+`httpx` · `pydantic` v2 · `pandas` · `pyarrow` · `duckdb` · `typer` · `rich` · `streamlit` · `altair` — a compact stack that covers ingestion, validation, a real warehouse, a CLI, and a dashboard.

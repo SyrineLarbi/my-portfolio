@@ -1,0 +1,39 @@
+---
+title: Customer Churn Classifier — Telco
+blurb: End-to-end XGBoost classifier on the public IBM Telco churn dataset — scikit-learn Pipeline + ColumnTransformer, SHAP explainability, a model card, and an interactive Streamlit demo. ROC-AUC 0.842.
+personas: [data]
+stack:
+  - Python
+  - scikit-learn
+  - XGBoost
+  - SHAP
+  - Streamlit
+  - pandas
+  - numpy
+  - matplotlib
+  - seaborn
+links:
+  github: https://github.com/SyrineLarbi/churn-classifier
+  demo: https://churn-classifier-nk8qxgpsbeh8akhk3luqwu.streamlit.app/
+---
+
+## What it is
+
+A supervised classifier that flags which telecom customers are likely to churn, built on the public [IBM Telco Customer Churn](https://www.kaggle.com/datasets/blastchar/telco-customer-churn) dataset. The whole path — preprocessing, training, evaluation, explainability, and a live demo — is reproducible from a single `git clone`.
+
+## Highlights
+
+- **Performance** — ROC-AUC **0.842**, PR-AUC **0.652**, accuracy **0.81** on a 20% stratified holdout. Churn recall of **0.55**, tuned to catch at-risk customers rather than chase headline accuracy on an imbalanced target.
+- **Explainability** — SHAP summary, bar, and waterfall plots turn the XGBoost model into a story: **tenure**, **month-to-month contracts**, **fiber-optic service**, **monthly charges**, and **electronic-check payment** are the top churn drivers by mean absolute SHAP value.
+- **Live demo** — a Streamlit app with slider controls lets anyone score a hypothetical customer and see the prediction change in real time.
+- **Documented** — a model card records the dataset, metrics, intended use, and limitations, so the numbers are honest about what the model can and can't do.
+
+## What it took
+
+- **Preprocessing** — one scikit-learn `Pipeline` + `ColumnTransformer` handling numeric scaling and categorical encoding, so the exact same transforms run at training and inference time — no train/serve skew.
+- **Training & evaluation** — XGBoost fit in ~3 seconds, evaluated with ROC and PR curves plus a confusion matrix rather than accuracy alone, because churn is an imbalanced problem where accuracy flatters.
+- **Reproducibility** — pinned dependencies, a fast training script, and saved figures so the README and model card embed real plots. Clone, install, run end-to-end.
+
+## Stack at a glance
+
+`scikit-learn` (Pipeline + ColumnTransformer) · `xgboost` · `shap` · `streamlit` · `pandas` / `numpy` · `matplotlib` / `seaborn` — the smallest set that covers preprocessing, modeling, explainability, and a shippable demo.
