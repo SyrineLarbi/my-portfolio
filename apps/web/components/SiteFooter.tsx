@@ -5,7 +5,7 @@ export function SiteFooter() {
   return (
     <footer className="border-t border-white/5 mt-32 px-6 py-10 text-center text-sm text-text-muted">
       <div className="mx-auto max-w-6xl flex flex-col md:flex-row items-center justify-between gap-4">
-        <p>© {new Date().getFullYear()} Syrine Larbi · Built with Next.js · NestJS · Neon · BullMQ</p>
+        <p>© {new Date().getFullYear()} Syrine Larbi · Built with Next.js · Prisma · Neon · Resend · Vercel</p>
         <div className="flex gap-4">
           <Link href="https://github.com/SyrineLarbi" target="_blank" className="hover:text-text">
             <Github />
