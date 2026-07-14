@@ -51,8 +51,8 @@ export default function HomePage() {
       <section id="contact" className="mx-auto max-w-6xl px-6 py-24">
          <SectionHeader eyebrow="Get in touch" title="Send a message" />
         <p className="mb-6 text-text-muted">
-          The form below queues your message via BullMQ and emails me through Resend. You'll
-          get a reply within 24 hours.
+          The form below saves your message to Postgres (Neon) and emails me through Resend,
+          all on Next.js serverless functions. You'll get a reply within 24 hours.
         </p>
         <Suspense fallback={null}>
           <ContactForm />
