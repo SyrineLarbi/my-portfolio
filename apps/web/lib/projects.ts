@@ -13,7 +13,7 @@ export type ProjectMeta = {
   personas: Persona[]
   flagship?: boolean
   comingSoon?: boolean
-  links?: { github?: string; demo?: string; nbviewer?: string }
+  links?: { github?: string; demo?: string; demoVideo?: string; nbviewer?: string }
 }
 
 const dir = path.join(process.cwd(), 'content', 'projects')
