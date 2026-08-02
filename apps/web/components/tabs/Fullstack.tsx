@@ -101,6 +101,7 @@ export function FullstackTab() {
             links={{
               github: 'https://github.com/SyrineLarbi/AI-powered-Digital-Talent-Portfolio-Platform',
               demo: 'https://ai-powered-digital-talent-portfolio.vercel.app',
+              demoVideo: '/demos/ai-talent-portfolio.mp4',
               example: 'https://www.reacchy.com/rymebnmessaoud',
             }}
           />
@@ -115,6 +116,7 @@ export function FullstackTab() {
             links={{
               github: 'https://github.com/SyrineLarbi/resume_builder',
               demo: 'https://resume-builder-web-8qnv.vercel.app/dashboard',
+              demoVideo: '/demos/resume-builder.mp4',
             }}
           />
           <ProjectCard
