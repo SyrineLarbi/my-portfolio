@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 
+import { DemoVideoPlayer } from '@/components/DemoVideo'
 import { getProject, listProjects } from '@/lib/projects'
 
 export async function generateStaticParams() {
@@ -33,6 +34,19 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       <p className="text-xs uppercase tracking-[0.3em] text-text-muted">{meta.flagship ? 'Flagship' : 'Project'}</p>
       <h1 className="gradient-text">{meta.title}</h1>
       <p className="lead text-text-muted">{meta.blurb}</p>
+      {meta.links?.demoVideo && (
+        <>
+          <h2>Demo</h2>
+          <DemoVideoPlayer src={meta.links.demoVideo} title={meta.title} />
+          {meta.links.demo && (
+            <p className="text-sm">
+              <a href={meta.links.demo} target="_blank" rel="noreferrer">
+                Open the live app →
+              </a>
+            </p>
+          )}
+        </>
+      )}
       <Content />
     </main>
   )
