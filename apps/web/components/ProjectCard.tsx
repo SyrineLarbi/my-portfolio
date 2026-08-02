@@ -1,11 +1,20 @@
 import type { Route } from 'next'
 import Link from 'next/link'
 
+import { DemoVideoButton } from './DemoVideo'
+
 export type ProjectProps = {
   title: string
   blurb: string
   stack: string[]
-  links?: { github?: string; demo?: string; nbviewer?: string; example?: string }
+  links?: {
+    github?: string
+    demo?: string
+    /** Path to a recorded walkthrough under /public — replaces the outbound demo link. */
+    demoVideo?: string
+    nbviewer?: string
+    example?: string
+  }
   highlight?: boolean
   comingSoon?: boolean
   /** When set, the card title links to the /projects/<slug> detail page. */
@@ -62,10 +71,14 @@ export function ProjectCard({ title, blurb, stack, links, highlight, comingSoon,
               GitHub →
             </a>
           )}
-          {links?.demo && (
-            <a href={links.demo} target="_blank" rel="noreferrer" className="text-accent-magenta hover:underline">
-              Live demo →
-            </a>
+          {links?.demoVideo ? (
+            <DemoVideoButton src={links.demoVideo} title={title} liveUrl={links.demo} />
+          ) : (
+            links?.demo && (
+              <a href={links.demo} target="_blank" rel="noreferrer" className="text-accent-magenta hover:underline">
+                Live demo →
+              </a>
+            )
           )}
           {links?.example && (
             <a href={links.example} target="_blank" rel="noreferrer" className="text-accent-magenta hover:underline">
